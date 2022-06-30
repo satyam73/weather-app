@@ -11,25 +11,33 @@ const requests = require('requests');
 
 //setting view engine
 app.set('view engine', 'hbs');
+
 //setting views pathss
 app.set("views", templatePath);
+
 //registering partials
 hbs.registerPartials(partialsPath)
-    //serving files with express.static() middleware
+
+//----middlewares
 app.use(express.static(staticPath));
 app.use(express.json())
-    //routing 
+
+
+//routing 
 
 app.get("/", (req, res) => {
     res.render("index");
 });
+
 app.get("/about", (req, res) => {
     res.render("about");
 });
+
 app.get("/weather", (req, res) => {
-        res.render("weather");
-    })
-    // api for getting weather info
+    res.render("weather");
+})
+
+// api for getting weather info
 app.get("/api/weather/:cityName", (req, res) => {
     const city = req.params.cityName;
     let data;
